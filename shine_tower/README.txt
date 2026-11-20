@@ -55,3 +55,5 @@ LATEST UPDATE
   shower-bathroom-glass.html
   glass-railings-mirrors.html
 - Services landing page cards link to their individual service pages.
+
+Official Shine Tower logo: assets/images/shine-tower-logo.png. It is used in the shared header and footer across all pages.

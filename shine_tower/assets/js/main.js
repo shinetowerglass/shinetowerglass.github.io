@@ -1,3 +1,22 @@
+
+// Hide the branded preloader once the page and its assets have loaded.
+(() => {
+  const hidePreloader = () => {
+    const preloader = document.getElementById("site-preloader");
+    if (!preloader || preloader.classList.contains("is-hidden")) return;
+    preloader.classList.add("is-hidden");
+    window.setTimeout(() => preloader.remove(), 550);
+  };
+  if (document.readyState === "complete") {
+    window.setTimeout(hidePreloader, 120);
+  } else {
+    window.addEventListener("load", hidePreloader, { once: true });
+  }
+  window.addEventListener("pageshow", (event) => {
+    if (event.persisted) hidePreloader();
+  });
+})();
+
 document.addEventListener("DOMContentLoaded", () => {
   const page = document.body.dataset.page || "";
   const navItems = [
@@ -17,8 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container">
           <a class="navbar-brand" href="index.html" aria-label="Shine Tower home">
-            <span class="brand-mark"><i class="bi bi-buildings"></i></span>
-            <span class="brand-name">SHINE TOWER<small>GLASS & ALUMINUM WORKS LLC SPC</small></span>
+            <img class="brand-logo" src="assets/images/shine-tower-logo.png" alt="Shine Tower Glass and Aluminum Works LLC SPC">
           </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
           <div class="collapse navbar-collapse" id="mainNav">
@@ -44,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const footer = document.getElementById("site-footer");
   if (footer) footer.innerHTML = `
     <footer class="site-footer"><div class="container"><div class="row g-4">
-      <div class="col-lg-5"><div class="footer-brand">SHINE TOWER<small>GLASS & ALUMINUM WORKS LLC SPC</small></div><p class="footer-copy">Professional glass and aluminum solutions for residential, commercial and industrial applications in Abu Dhabi, UAE.</p></div>
+      <div class="col-lg-5"><a class="footer-brand-logo-link" href="index.html" aria-label="Shine Tower home"><img class="footer-brand-logo" src="assets/images/shine-tower-logo.png" alt="Shine Tower Glass and Aluminum Works LLC SPC"></a><p class="footer-copy">Professional glass and aluminum solutions for residential, commercial and industrial applications in Abu Dhabi, UAE.</p></div>
       <div class="col-6 col-lg-2"><h4>Explore</h4><ul class="footer-links">${navItems.map(([k,l,u])=>`<li><a href="${u}">${l}</a></li>`).join("")}</ul></div>
       <div class="col-6 col-lg-2"><h4>Our services</h4><ul class="footer-links"><li><a href="services.html">Aluminum doors & windows</a></li><li><a href="services.html">Glass partitions</a></li><li><a href="services.html">Glass facades</a></li><li><a href="services.html">Shopfronts</a></li></ul></div>
       <div class="col-lg-3"><h4>Contact</h4><div class="footer-contact"><p><i class="bi bi-geo-alt me-2"></i>M37, Musaffah, Abu Dhabi, UAE</p><p><i class="bi bi-telephone me-2"></i><a class="footer-contact" href="tel:+971506767279">+971 50 676 7279</a></p><p><i class="bi bi-whatsapp me-2"></i><a class="footer-contact" href="https://wa.me/971506767279">WhatsApp us</a></p></div></div>
